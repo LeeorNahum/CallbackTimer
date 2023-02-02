@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "*.tpp": "cpp",
-        "new": "cpp"
-    },
-    "C_Cpp.errorSquiggles": "enabled"
-}
