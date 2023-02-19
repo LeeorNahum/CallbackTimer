@@ -1,7 +1,7 @@
 #ifndef CALLBACKTIMER_H
 #define CALLBACKTIMER_H
 
-#include <Arduino.h>
+#include <wiring.c>
 
 class CallbackTimer {
   public:
