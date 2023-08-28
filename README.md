@@ -8,7 +8,7 @@ The CallbackTimer library allows you to create repeating timers and add an optio
 
 ## Features
 
-- Configure the timer with a specified time in milliseconds.
+- Configure the timer with a specified time in milliseconds (or microseconds).
 - Provide an optional callback function to be executed when the timer expires.
 - Restart, skip, and enable/disable the timer.
 - Check the time remaining, time elapsed, and if the timer has expired.
