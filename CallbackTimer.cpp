@@ -79,8 +79,8 @@ bool CallbackTimer::checkExpired() {
   
   if (this->getTimeElapsed() > this->getTimerDuration()) {
     this->restartTimer();
-    if (this->callback != nullptr) {
-      this->callback();
+    if (this->getTimerExpiredCallback() != nullptr) {
+      this->getTimerExpiredCallback()();
     }
     return true;
   }
