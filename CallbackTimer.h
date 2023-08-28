@@ -5,7 +5,7 @@
 
 class CallbackTimer {
   public:
-    using TimerExpiredCallback = void (*)();
+    using TimerExpiredCallback = std::function<void()>;
 
     CallbackTimer(unsigned long timer_duration, TimerExpiredCallback callback = nullptr);
 
