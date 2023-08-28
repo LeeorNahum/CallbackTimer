@@ -1,21 +1,21 @@
 #include "CallbackTimer.h"
 
-CallbackTimer::CallbackTimer(unsigned long timer_ms, TimerExpiredCallback callback) {
-  this->configure(timer_ms, callback);
+CallbackTimer::CallbackTimer(unsigned long timer_duration, TimerExpiredCallback callback) {
+  this->configure(timer_duration, callback);
 }
 
-void CallbackTimer::configure(unsigned long timer_ms, TimerExpiredCallback callback) {
-  this->setTimerMS(timer_ms);
+void CallbackTimer::configure(unsigned long timer_duration, TimerExpiredCallback callback) {
+  this->setTimerDuration(timer_duration);
   this->setTimerExpiredCallback(callback);
 }
 
-void CallbackTimer::setTimerMS(unsigned long timer_ms) {
-  this->timer_ms = timer_ms;
+void CallbackTimer::setTimerDuration(unsigned long timer_duration) {
+  this->timer_duration = timer_duration;
   this->restartTimer();
 }
 
-unsigned long CallbackTimer::getTimerMS() {
-  return this->timer_ms;
+unsigned long CallbackTimer::getTimerDuration() {
+  return this->timer_duration;
 }
 
 void CallbackTimer::setTimerExpiredCallback(TimerExpiredCallback callback) {
@@ -49,11 +49,11 @@ bool CallbackTimer::getEnabled() {
 }
 
 void CallbackTimer::restartTimer() {
-  this->last_run_timestamp = millis();
+  this->last_run_timestamp = this->getCurrentTime();
 }
 
 void CallbackTimer::skipTimer() {
-  this->last_run_timestamp = this->getTimerMS();
+  this->last_run_timestamp = this->getCurrentTime() - this->getTimerDuration();
 }
 
 unsigned long CallbackTimer::getLastRunTimestamp() {
@@ -61,13 +61,13 @@ unsigned long CallbackTimer::getLastRunTimestamp() {
 }
 
 unsigned long CallbackTimer::getTimeElapsed() {
-  return millis() - this->getLastRunTimestamp();
+  return this->getCurrentTime() - this->getLastRunTimestamp();
 }
 
 unsigned long CallbackTimer::getTimeRemaining() {
   unsigned long elapsed = this->getTimeElapsed();
-  if (this->getTimerMS() > elapsed) {
-    return this->getTimerMS() - elapsed;
+  if (this->getTimerDuration() > elapsed) {
+    return this->getTimerDuration() - elapsed;
   }
   return 0;
 }
@@ -77,7 +77,7 @@ bool CallbackTimer::checkExpired() {
     return false;
   }
   
-  if (this->getTimeElapsed() > this->getTimerMS()) {
+  if (this->getTimeElapsed() > this->getTimerDuration()) {
     this->restartTimer();
     if (this->callback != nullptr) {
       this->callback();
@@ -85,4 +85,12 @@ bool CallbackTimer::checkExpired() {
     return true;
   }
   return false;
+}
+
+unsigned long CallbackTimer::getCurrentTime() const {
+  return millis();
+}
+
+unsigned long MicrosCallbackTimer::getCurrentTime() const {
+  return micros();
 }
