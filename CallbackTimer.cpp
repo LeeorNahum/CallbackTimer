@@ -53,7 +53,7 @@ void CallbackTimer::restartTimer() {
 }
 
 void CallbackTimer::skipTimer() {
-  this->last_run_timestamp = this->getCurrentTime() - this->getTimerDuration();
+  this->last_run_timestamp = this->getCurrentTime() + this->getTimerDuration(); // TODO fixed?
 }
 
 unsigned long CallbackTimer::getLastRunTimestamp() {
