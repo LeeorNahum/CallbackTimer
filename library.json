@@ -1,0 +1,20 @@
+{
+  "name": "CallbackTimer",
+  "version": "1.0.1",
+  "description": "A library for creating timers with callback functions when the timer expires.",
+  "keywords": "arduino, library, timers, callbacks, repeating timers, expiration, control, restart, skip, enable, disable, status",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/LeeorNahum/CallbackTimer"
+  },
+  "authors":
+  [
+    {
+      "name": "Leeor Nahum",
+      "email": "leeornahum@gmail.com"
+    }
+  ],
+  "frameworks": "arduino",
+  "platforms": "*"
+}
